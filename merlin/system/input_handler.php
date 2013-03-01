@@ -3,10 +3,10 @@
 namespace merlin\input;
 
 class Request {
-    protected $blah = "blah";
     protected $gets = array();
     protected $posts = array();
     protected $servers = array();
+    protected $params = array();
 
     function construct_request(){
         $this->posts = $_POST;
@@ -18,15 +18,23 @@ class Request {
     }
 
     function get($param) {
-
+        return $this->gets[$param];
     }
 
     function post($param) {
-
+        return $this->posts[$param];
     }
 
-    function file($param) {
+    function server($param) {
+        return $this->servers[$param];
+    }
 
+    function param($param) {
+        return $this->params[$param];
+    }
+
+    function set_url_params($map) {
+        $this->params = $map;
     }
 
     function get_url_segment(){

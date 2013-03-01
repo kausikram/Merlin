@@ -12,4 +12,7 @@ function start($config_file) {
     $input_request = \merlin\input\generate_request();
     $controller = \merlin\urls\find_controller($input_request);
     \merlin\middlewares\load_middlewares($input_request);
+    if( isset($controller)){
+        return $controller($input_request);
+    }
 }

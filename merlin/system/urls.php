@@ -23,10 +23,13 @@ function load_url_map($url_module, $base_segment) {
 function find_controller(&$req) {
     \merlin\logger\log("In merlins\\urls\\find_controller");
     load_url_map(\merlin\config\get_config_item("base_url_namespace"), "");
+    var_dump($GLOBALS);
     foreach($GLOBALS["url_routes"] as $route=>$controller){
         $pattern = "#" . $route . "#i";
-        if(preg_match($pattern, $req->get_url_segment())) {
+        $matches = array();
+        if(preg_match($pattern, $req->get_url_segment(), $matches)) {
             \merlin\logger\log("best match controller: " . $controller);
+            $req->set_url_params($matches);
             return $controller;
         }
     }
