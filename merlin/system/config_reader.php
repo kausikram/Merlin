@@ -7,7 +7,9 @@ function set_config_file($fn){
 }
 
 function get_config_item($key){
-    \merlin\logger\log("in get_config_item file name: " . $GLOBALS["base_config_file"]);
-    require_once($GLOBALS["base_config_file"]);
-    return $config[$key];
+    \merlin\logger\log("in get_config_item for: " . $key);
+    require($GLOBALS["base_config_file"]);
+    $value = $config[$key];
+    \merlin\logger\log("returning value: " . $value);
+    return $value;
 }
