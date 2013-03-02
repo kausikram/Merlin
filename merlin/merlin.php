@@ -4,6 +4,7 @@ require("system/logger.php");
 require("system/urls.php");
 require("system/config_reader.php");
 require("system/input_handler.php");
+require("system/generic_controllers.php");
 require("system/middlewares/index.php");
 
 

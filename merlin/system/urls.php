@@ -32,5 +32,5 @@ function find_controller(&$req) {
             return $controller;
         }
     }
-    return null;
+    return "\\merlin\\generic\\controllers\\controller_404";
 }

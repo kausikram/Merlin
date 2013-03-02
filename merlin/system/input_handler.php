@@ -6,6 +6,7 @@ class Request {
     protected $gets = array();
     protected $posts = array();
     protected $servers = array();
+    protected $sessions = array();
     protected $params = array();
 
     function construct_request(){
@@ -18,19 +19,31 @@ class Request {
     }
 
     function get($param) {
-        return $this->gets[$param];
+        if(isset($this->gets[$param])){
+            return $this->gets[$param];
+        }
+        return null;
     }
 
     function post($param) {
-        return $this->posts[$param];
+        if(isset($this->posts[$param])){
+            return $this->posts[$param];
+        }
+        return null;
     }
 
     function server($param) {
-        return $this->servers[$param];
+        if(isset($this->servers[$param])){
+            return $this->servers[$param];
+        }
+        return null;
     }
 
     function param($param) {
-        return $this->params[$param];
+        if(isset($this->params[$param])){
+            return $this->params[$param];
+        }
+        return null;
     }
 
     function set_url_params($map) {
@@ -38,7 +51,7 @@ class Request {
     }
 
     function get_url_segment(){
-        return $this->servers["PATH_INFO"];
+        return $this->server("PATH_INFO");
     }
 }
 
