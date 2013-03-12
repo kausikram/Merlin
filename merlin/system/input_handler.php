@@ -7,6 +7,7 @@ class Request {
     protected $posts = array();
     protected $servers = array();
     protected $sessions = array();
+    protected $route_configs = array();
     protected $params = array();
 
     function construct_request(){
@@ -52,6 +53,14 @@ class Request {
 
     function get_url_segment(){
         return $this->server("PATH_INFO");
+    }
+
+    function set_url_configs($config_array){
+        $this->route_configs = $config_array;
+    }
+
+    function requires_authentication(){
+        return isset($this->route_configs["secure"]);
     }
 }
 
