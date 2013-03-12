@@ -8,6 +8,7 @@ class Request {
     protected $servers = array();
     protected $sessions = array();
     protected $route_configs = array();
+    protected $errors = array();
     protected $params = array();
 
     function construct_request(){
@@ -33,11 +34,33 @@ class Request {
         return null;
     }
 
+    function all_posts(){
+        return $this->posts;
+    }
+
     function server($param) {
         if(isset($this->servers[$param])){
             return $this->servers[$param];
         }
         return null;
+    }
+
+    function error($param) {
+        if(isset($this->errors[$param])){
+            return $this->errors[$param];
+        }
+        return null;
+    }
+
+    function all_errors() {
+        return $this->errors;
+    }
+
+    function has_errors() {
+        if(count($this->errors) > 0){
+            return true;
+        }
+        return false;
     }
 
     function param($param) {
@@ -62,6 +85,11 @@ class Request {
     function requires_authentication(){
         return isset($this->route_configs["secure"]);
     }
+
+    function method(){
+        return $this->server("REQUEST_METHOD");
+    }
+
 }
 
 function generate_request() {
