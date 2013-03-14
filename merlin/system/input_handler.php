@@ -70,6 +70,13 @@ class Request {
         return null;
     }
 
+    function urlconfig($param){
+        if(isset($this->route_configs[$param])){
+            return $this->route_configs[$param];
+        }
+        return null;                            
+    }
+
     function set_url_params($map) {
         $this->params = $map;
     }

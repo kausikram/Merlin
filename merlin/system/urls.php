@@ -23,6 +23,7 @@ function load_url_map($url_module, $base_segment, $base_url_config_params) {
 
 function find_controller(&$req) {
     \merlin\logger\log("In merlins\\urls\\find_controller");
+    \merlin\logger\log("THe URL pattern is : " . $req->get_url_segment());
     load_url_map(\merlin\config\get_config_item("base_url_namespace"), "", array());
     foreach($GLOBALS["url_routes"] as $route=>$route_config){
         $controller = $route_config["controller"];
@@ -36,4 +37,18 @@ function find_controller(&$req) {
         }
     }
     return "\\merlin\\generic\\controllers\\controller_404";
+}
+
+
+function get_url_by_name($name, $params){
+    //TODO: get_url_by_name_should_replace_patterns
+    \merlin\logger\log("in get url by name : " . $name . "with params: " . var_export($params, true));
+    foreach($GLOBALS["url_routes"] as $k=>$v){
+        if ((isset($v["name"])) && ($v["name"]==$name)){
+            $url_str = \merlin\config\get_config_item("base_uri_component") . "/" . $k;
+
+            return trim($url_str,"$");
+        }
+    }
+    return null;
 }
