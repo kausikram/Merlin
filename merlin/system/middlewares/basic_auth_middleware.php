@@ -9,6 +9,7 @@ function _force_authenticate(){
 }
 
 function process_request(&$req){
+    \merlin\logger\log(" in merlin\\middlewares\\basic_auth_middleware\\process_request");
     $pairs = \merlin\config\get_config_item("basic_auth_pairs");
     if($req->requires_authentication()){
         $auth_user = $req->server('PHP_AUTH_USER');

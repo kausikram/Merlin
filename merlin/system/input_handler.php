@@ -45,6 +45,9 @@ class Request {
         return null;
     }
 
+    function set_error($k, $v){
+        $this->errors[$k] = $v;
+    }
     function error($param) {
         if(isset($this->errors[$param])){
             return $this->errors[$param];
