@@ -9,7 +9,9 @@ function set_config_file($fn){
 function get_config_item($key){
     //\merlin\logger\log("in get_config_item for: " . $key);
     require($GLOBALS["base_config_file"]);
-    $value = $config[$key];
+    if(isset($config[$key])){
+        return $config[$key];
+    }
     //\merlin\logger\log("returning value: " . var_export($value, true));
-    return $value;
+    return null;
 }
